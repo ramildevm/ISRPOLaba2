@@ -1,0 +1,32 @@
+﻿<div style="float:left;width:100px">
+    <h4>Меню</h4>
+    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+        <ul class="navbar-nav flex-grow-1">
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-controller="Home" asp-action="Taskthird">Каталог</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-controller="Home" asp-action="AddBook">Добавить книгу</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div style="margin-left:250px">
+    @using (Html.BeginForm("AddBook", "Home", FormMethod.Post))
+    {
+        <div>
+            <div style="display:inline-block">
+                <div>Название: </div><input type="text" name="name">
+            </div>
+            <div style="display:inline-block">
+                <div>Автор: </div><input type="text" name="author">
+            </div>
+            <div style="display:inline-block">
+                <div>Год издания: </div><input type="number" name="year">
+            </div>
+        </div>
+        <br />
+        <input id="addBtn" type="submit">
+        <br />
+    }
+</div>

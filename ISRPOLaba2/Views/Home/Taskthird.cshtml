@@ -1,0 +1,73 @@
+﻿@{
+    List<Book> blist = ViewBag.list;
+}
+<div style="float:left;width:100px; height:400px">
+    <h4>Меню</h4>
+    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+        <ul class="navbar-nav flex-grow-1">
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-controller="Home" asp-action="Taskthird">Каталог</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-controller="Home" asp-action="AddBook">Добавить книгу</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div style="margin-left:250px">
+    <div>
+        @using (Html.BeginForm("Taskthird", "Home", FormMethod.Post))
+        {
+            <table>
+                <tr><th>Номер</th><th>Имя</th><th>Автор </th><th>Год издания</th><th></th></tr>
+                @try
+                {
+                    foreach (Book i in blist)
+                    {
+                        <tr>
+                            <td>@i.Id</td>
+                            <td>@i.Name </td>
+                            <td>@i.Author</td>
+                            <td>@i.Year</td>
+                            <td>
+                                <div>
+                                    <button class="deleteBtn" name="action" value="@i.Id">Удалить</button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+                catch { }
+            </table>
+            <br />
+        }
+    </div>
+    <div>
+
+        @using (Html.BeginForm("Taskthird", "Home", FormMethod.Post))
+        {
+            <select name="option" onchange="OnSelectionChange(this)">
+                <option selected value="num">Номер</option>
+                <option value="name">Имя</option>
+                <option value="author">Автор</option>
+                <option value="year">Год издания</option>
+            </select>
+            <br />
+            <input id="inputTxt" type="number" name="txt">
+            <button id="findBtn" name="action" value="find">Найти</button>
+            <br />
+        }
+        <script>
+            function OnSelectionChange(select) {
+                var selectedOption = select.options[select.selectedIndex].value;
+                var input = document.querySelector('#inputTxt');
+                if (selectedOption == "year" || selectedOption == "num") {
+                    input.setAttribute('type', 'number');
+                }
+                else {
+                    input.setAttribute('type', 'text');
+                }
+            }
+        </script>
+    </div>
+</div>
